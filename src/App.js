@@ -9,7 +9,8 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="container">
+        <div className="container App">
+        <h2>Keycloak React Authentication</h2>
           <ul>
             <li><Link to="/">public component</Link></li>
             <li><Link to="/secured">secured component</Link></li>

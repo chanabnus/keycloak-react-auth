@@ -4,6 +4,7 @@ class Welcome extends Component {
   render() {
     return (
       <div className="Welcome">
+        <hr/>
         <p>This is your public-facing component.</p>
       </div>
     );

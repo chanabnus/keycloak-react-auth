@@ -1,8 +1,10 @@
 {
-    "realm": "keycloak-auth",
-    "auth-server-url": "http://localhost:8080/auth/",
-    "ssl-required": "external",
-    "resource": "keycloak-auth-client",
-    "public-client": true,
-    "confidential-port": 0
-  }
+  "realm": "keycloak-auth",
+  "clientId": "keycloak-auth-client",
+  "url": "https://localhost:8443/auth/",
+  "auth-server-url": "https://localhost:8443/auth/",
+  "ssl-required": "external",
+  "resource": "keycloak-auth-client",
+  "public-client": true,
+  "confidential-port": 0
+}
