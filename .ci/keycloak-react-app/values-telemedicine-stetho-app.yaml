@@ -1,0 +1,57 @@
+# Default values for keycloak-react-auth.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  registry: "image-registry.openshift-image-registry.svc:5000"
+  pullPolicy: Always
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+buildConfig: 
+  secretname: "github-user-keycloak-react-auth"
+  branch: "master"
+  username: chanab@sg.ibm.com
+  token: "6c673415e78b82b90f02098c686ae17e8817651d"
+
+replicaCount: 1
+  
+pvc:
+  # Leave blank in CRC
+  # storageClass: "ocs-storagecluster-cephfs"
+  storageClass: ""
+  volumeMode: "Filesystem" 
+  size: "15Mi"
+  create: true
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 4926
+  portws: 6011
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+nipSubdomain: "9.178.216.70.nip.io"

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "keycloak-react-auth.fullname" . }}
+  labels:
+    {{- include "keycloak-react-auth.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      protocol: TCP
+      name: {{ .Values.service.port }}-tcp
+    - port: {{ .Values.service.portws }}
+      targetPort: {{ .Values.service.portws }}
+      protocol: TCP
+      name: {{ .Values.service.portws }}-tcp
+  selector:
+    {{- include "keycloak-react-auth.selectorLabels" . | nindent 4 }}

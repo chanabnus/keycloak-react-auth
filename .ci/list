@@ -1,0 +1,13 @@
+.keycloak-react-auth-pvc
+acoustics-cm
+keycloak-react-auth ==> Build Config
+keycloak-react-auth ==> Image Stream
+keycloak-react-auth ==> Deployments
+keycloak-react-auth-svc ==> Services
+
+
+keycloak-react-auth-route        https://keycloak-react-auth-route-acoustic-proj-01-dev.ims.sg.ibm.com
+keycloak-react-auth-ws-route     https://keycloak-react-auth-ws-route-acoustic-proj-01-dev.ims.sg.ibm.com 
+keycloak-react-auth-route-nip    https://keycloak-react-auth-route-acoustic-proj-01-dev.9.178.216.70.nip.io
+keycloak-react-auth-ws-route-nip https://keycloak-react-auth-ws-route-acoustic-proj-01-dev.9.178.216.70.nip.io
+keycloak-react-auth-file-browser-route-nip   https://keycloak-react-auth-file-browser-route-acoustic-proj-01-dev.9.178.216.70.nip.io

@@ -1,0 +1,66 @@
+pipeline {
+  agent any
+  stages {
+    stage('Delete Config and Deployment') {
+    	steps {
+        script {
+          openshift.withCluster() {
+            configFileProvider(
+              [configFile(fileId: '68c9ae53-101e-4ef9-b3c4-a4d4e49ba2a8', targetLocation: 'vars')]) {
+
+              config = readJSON file: 'vars'
+
+              openshift.withProject("$config.des_img") {
+                openshift.selector("all", [ app : 'keycloak-react-auth']).delete()
+              }
+            }
+          }
+        }
+      }
+    }
+    stage('Tag Latest Build from UAT') {
+    	steps {
+        script {
+          openshift.withCluster() {
+            configFileProvider(
+              [configFile(fileId: '68c9ae53-101e-4ef9-b3c4-a4d4e49ba2a8', targetLocation: 'vars')]) {
+
+              config = readJSON file: 'vars'
+              String imgTemplate = '%s/keycloak-react-auth:latest'
+              def srcTag = sprintf(imgTemplate, "$config.src_img")
+              def desTag = sprintf(imgTemplate, "$config.des_img")
+
+              openshift.withProject("$config.des_img") {
+                def result = openshift.tag(srcTag, desTag)
+                echo "Status of tagging keycloak-react-auth: ${result.status}"
+              }
+            }
+          }
+        }
+      }
+    }
+    stage('Deploy New Config and Deployment') {
+    	steps {
+        script {
+          openshift.withCluster() {
+            configFileProvider(
+              [configFile(fileId: '68c9ae53-101e-4ef9-b3c4-a4d4e49ba2a8', targetLocation: 'vars')]) {
+
+              config = readJSON file: 'vars'
+
+              openshift.withProject("$config.des_img") {
+                def deployment = openshift.process(readFile(file:'.ci/deployment.yaml'), "-p=TAG=${config.tag}")
+                try {
+                  def deployResult = openshift.create(deployment)
+                  echo "Status of deploying deployment: ${deployResult.status}"
+                } catch(Exception ex) {
+                  echo "exception caught: ${ex}"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

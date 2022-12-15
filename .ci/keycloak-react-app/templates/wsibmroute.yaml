@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    {{- include "keycloak-react-auth.labels" . | nindent 4 }}
+  name: {{ include "keycloak-react-auth.fullname" . }}-ws-ibm
+spec:
+  port:
+    targetPort: {{ .Values.service.portws }}-tcp
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: {{ include "keycloak-react-auth.fullname" . }}
+    weight: 100
+  wildcardPolicy: None

@@ -1,0 +1,46 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    build: keycloak-react-auth
+  name: keycloak-react-auth
+spec:
+  failedBuildsHistoryLimit: 3
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'keycloak-react-auth:uat'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: master
+      uri: 'https://github.ibm.com/5G-Industry4-0/keycloak-react-auth'
+    sourceSecret:
+      name: github-user
+    type: Git
+  strategy:
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+    type: Docker
+  successfulBuildsHistoryLimit: 3
+  triggers:
+    - github:
+        secret: Qf9GLTgS-JfV8zbUMCxe
+      type: GitHub
+    - generic:
+        secret: 3dl-X4TvBhF_VuXlToV4
+      type: Generic
+    - type: ConfigChange
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    build: keycloak-react-auth
+  name: keycloak-react-auth
+spec:
+  lookupPolicy:
+    local: false

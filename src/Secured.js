@@ -10,6 +10,17 @@ class Secured extends Component {
   componentDidMount() {
     const keycloak = new Keycloak('/keycloak.json');
 
+    // const keycloak = new Keycloak({
+    //   "realm": "keycloak-auth",
+    //   "clientId": "keycloak-auth-client",
+    //   "url": "https://9.178.216.221:8443/auth/",
+    //   "auth-server-url": "https://9.178.216.221:8443/auth/",
+    //   "ssl-required": "external",
+    //   "resource": "keycloak-auth-client",
+    //   "public-client": true,
+    //   "confidential-port": 0
+    // });
+
     keycloak
       .init({ onLoad: "login-required", checkLoginIframe: false })
       .then((authenticated) => {
