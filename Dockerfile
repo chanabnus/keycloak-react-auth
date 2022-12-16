@@ -27,10 +27,10 @@ RUN chmod g=u /etc/passwd \
 
 # ==== RUN =======
 # Set the env to "production"
-# ENV NODE_ENV production
+ENV NODE_ENV production
 
 # Expose the port on which the app will be running (3000 is the default that `serve` uses)
-# EXPOSE 5011
+EXPOSE 5011
 
 # Start the app
 # CMD [ "npx", "serve", "build" ]

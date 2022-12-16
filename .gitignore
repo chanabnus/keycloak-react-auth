@@ -7,6 +7,7 @@
 .pnp.js
 .ci
 node_modules
+helm.exe
 
 # testing
 /coverage
