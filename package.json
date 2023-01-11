@@ -19,6 +19,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chanabnus/keycloak-react-auth.git"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
